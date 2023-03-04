@@ -14,7 +14,7 @@ class MainViewModel extends ChangeNotifier { // ChangeNotifier :
   Future<void> getData() async {
     Response dt = await dio.get(url);
     try {
-      //debugPrint('data : $dt');
+      debugPrint('data : $dt');
     }
     catch (e) {
       debugPrint('No Data');
@@ -30,7 +30,7 @@ class MainViewModel extends ChangeNotifier { // ChangeNotifier :
     ed = List.from(jsonDecoder);
     notifyListeners();
     //debugPrint(ed.length.toString());
-    //debugPrint("http  :   $ed");
+    debugPrint("http  :   $ed");
     //debugPrint(parsedata(res.body) as String?);
     //parsedata(res.body);
   }
