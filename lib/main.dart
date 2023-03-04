@@ -30,7 +30,7 @@ class MainApp extends StatelessWidget {
     var listData = MainViewModel();
     listData.fetchDataList();
     return SizedBox(
-      height: MediaQuery.of(context).size.width,
+      height: 100,
       child: Column (children: [
         //
       ],)
