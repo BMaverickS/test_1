@@ -31,7 +31,10 @@ class MainApp extends StatelessWidget {
     listData.fetchDataList();
     return SizedBox(
       height: MediaQuery.of(context).size.width,
-      child: ListView.builder(
+      child: Column (children: [
+        //
+      ],)
+      /*child: ListView.builder(
         itemCount: listData.ed.length,
         itemBuilder: (BuildContext context, int index) { 
           return Column(
@@ -41,7 +44,7 @@ class MainApp extends StatelessWidget {
             ],
           );
         }                   ,
-      )
+      )*/
     );
   }
 }
