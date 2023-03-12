@@ -1,53 +1,28 @@
-import 'dart:convert';
-
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:test_1/model.dart';
-import 'package:http/http.dart' as http;
+import 'data_source.dart';
 
-class MainViewModel extends ChangeNotifier { // ChangeNotifier : 
-  Dio dio = Dio();
+class MainViewModel extends ChangeNotifier {
+  // ChangeNotifier : notify view when 1 or more variables change in its ViewModel. It prevents to use
+  // setState() function directly in our views which would results in unmaintainable code
+  // put 'notifyListener()' inside function to update view
+  // read more here : https://jgrandchavin.medium.com/flutter-provider-changenotifier-architecture-guide-47ad05aa608e
 
-  final url = "https://wizard-world-api.herokuapp.com/wizards";
-  List<dynamic> ed = [];
-
-  Future<void> getData() async {
-    Response dt = await dio.get(url);
-    try {
-      debugPrint('data : $dt');
-    }
-    catch (e) {
-      debugPrint('No Data');
-    }
-    notifyListeners();
+  Future<ElixirsList> getData() async { // dio
+    return DataSource().getDataSource();
   }
 
-  Future<dynamic> fetchDataList() async {//ElixirsData
-    final res = await http.get(Uri.parse(url));
-
-    //return res.body;
-    final jsonDecoder = json.decode(res.body);
-    ed = List.from(jsonDecoder);
-    notifyListeners();
-    //debugPrint(ed.length.toString());
-    debugPrint("http  :   $ed");
-    //debugPrint(parsedata(res.body) as String?);
-    //parsedata(res.body);
+  Future fetchDataList() async { // http
+    return DataSource().fetchDataListSource();
   }
-
-  // change response data type into ElixirsData
-  /*ElixirsList parsedata(final resp)
-  {
-    // from string to json object
-    final jsonDecoder = json.decode(resp);
-    //debugPrint(resp);
-    //final dt = JsonDecoder;
-    //debugPrint(jsonDecoder);
-
-    return ElixirsList.fromJSON(jsonDecoder);
-  }*/
-
-  // final : immutable (value is not known in compile time)
-  // var : mutable
-  // const : value is known at compile time
 }
+
+// final : immutable (value is not known in compile time)
+// var : mutable
+// const : value is known at compile time
+
+// get data from List<dynamic> without data model
+// https://medium.com/@bobbykboseoffice/json-parsing-using-dio-in-flutter-9c870d3d1759
+
+// get data using data model example tutorial
+// https://dhruvnakum.xyz/flutter-bloc-v8-how-to-fetch-data-from-an-api-2022-guide

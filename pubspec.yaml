@@ -13,6 +13,11 @@ dependencies:
   dio: ^4.0.0
   # http library
   http: ^0.13.5
+  # bloc
+  flutter_bloc: '^8.1.2'
+  #equatable : an abstract class that helps to implement equality without needing to explicitly 
+  #            override == and hashCode.
+  equatable: '^2.0.5'
 
 dev_dependencies:
   flutter_test:

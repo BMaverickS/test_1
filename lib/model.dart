@@ -3,9 +3,13 @@ class ElixirsList {
 
   ElixirsList({this.eList});
 
-  factory ElixirsList.fromJSON(List<dynamic> json) {
-    return ElixirsList(eList: json.map((e) => 
-      ElixirsData.fromJSON(e as Map<String, dynamic>)).toList());
+  factory ElixirsList.fromJson(List<dynamic> jsonList) {
+    return ElixirsList(
+      eList: jsonList.map((e) => ElixirsData.fromJson(e)).toList()
+    );
+    // can also be made like this :
+    //List<ElixirsData> eList = jsonList.map((e) => ElixirsData.fromJson(e)).toList();
+    //return ElixirsList(eList: eList);
   }
 }
 
@@ -22,9 +26,11 @@ class ElixirsData {
     this.lastName
   );
 
-  factory ElixirsData.fromJSON(Map<String, dynamic> json) {
+  factory ElixirsData.fromJson(Map<String, dynamic> json) {
+    var list = json["elixirs"] as List;
+
     return ElixirsData(
-      json["elixirs"],
+      list.map((e) => Elixirs.fromJson(e)).toList(),
       json["id"],
       json["firstName"],
       json["lastName"]
@@ -41,10 +47,12 @@ class Elixirs {
     this.name
   );
 
-  factory Elixirs.fromJSON(Map<String, dynamic> json) {
+  factory Elixirs.fromJson(Map<String, dynamic> json) {
     return Elixirs(
       json["id"],
       json["name"]
     );
   }
 }
+
+// Parsing complex json : https://medium.com/flutter-community/parsing-complex-json-in-flutter-747c46655f51
